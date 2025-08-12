@@ -97,10 +97,10 @@ const pipeline = new Pipeline({
     format === 'desktop'
       ? []
       : [
-          new DenseCaptionAugmenter(1),
-          new StateTransitionAugmenter(1),
-          new StructuredDataAugmenter(1)
-        ]
+        new DenseCaptionAugmenter(1),
+        new StateTransitionAugmenter(1),
+        new StructuredDataAugmenter(1)
+      ]
 });
 
 console.log(`Starting processing of ${sessions.length} sessions...`);
@@ -123,7 +123,11 @@ if (values.grade) {
       const result = await grader.grade(metaPath, sftPath);
       if (result) {
         console.log('\nGrading complete!');
-        console.log(`Score: ${result.score}`);
+        console.log(`Score: ${result.score}/100 (Confidence: ${(result.confidence * 100).toFixed(1)}%)`);
+        console.log('\nScore Breakdown:');
+        console.log(`- Outcome Achievement: ${result.outcomeAchievement}/100`);
+        console.log(`- Process Quality: ${result.processQuality}/100`);
+        console.log(`- Efficiency: ${result.efficiency}/100`);
         console.log('\nSummary:');
         console.log(result.summary);
         console.log('\nReasoning:');
@@ -156,7 +160,11 @@ if (values.grade) {
       const result = await grader.grade(metaPath, sftPath);
       if (result) {
         console.log('\nGrading complete!');
-        console.log(`Score: ${result.score}`);
+        console.log(`Score: ${result.score}/100 (Confidence: ${(result.confidence * 100).toFixed(1)}%)`);
+        console.log('\nScore Breakdown:');
+        console.log(`- Outcome Achievement: ${result.outcomeAchievement}/100`);
+        console.log(`- Process Quality: ${result.processQuality}/100`);
+        console.log(`- Efficiency: ${result.efficiency}/100`);
         console.log('\nSummary:');
         console.log(result.summary);
         console.log('\nReasoning:');
